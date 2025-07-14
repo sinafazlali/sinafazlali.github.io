@@ -225,6 +225,11 @@
         <li><span>Solidworks</span><span id="level11" class="level">متوسط</span></li>
         <li><span>C++</span><span id="level12" class="level">متوسط</span></li>
         <li><span>Python</span><span id="level13" class="level">متوسط</span></li>
+        <li><span>MATLAB Simulink</span><span id="level14" class="level">متوسط</span></li>
+        <li><span>ANSYS</span><span id="level15" class="level">مبتدی</span></li>
+        <li><span>CATIA</span><span id="level16" class="level">مبتدی</span></li>
+
+
       </ul>
     </div>
 
@@ -252,11 +257,13 @@
 <script>
   const levelsFaToEn = {
     "پیشرفته": "Advanced",
-    "متوسط": "Intermediate"
+    "متوسط": "Intermediate",
+    "مبتدی": "Beginner"
   };
   const levelsEnToFa = {
     "Advanced": "پیشرفته",
-    "Intermediate": "متوسط"
+    "Intermediate": "متوسط",
+    "Beginner": "مبتدی"
   };
 
   function toggleTheme() {
@@ -316,7 +323,7 @@
 
     document.getElementById("skills-title").innerText = en ? "Technical Skills" : "مهارت‌های نرم‌افزاری";
 
-    for(let i=1; i<=13; i++) {
+    for(let i=1; i<=16; i++) {
       let el = document.getElementById("level" + i);
       if(el) {
         if(en) {
