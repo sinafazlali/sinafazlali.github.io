@@ -5,32 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>رزومه سینا فضلعلی</title>
   <style>
-    /* Reset */
+    :root {
+      --bg-light: #f7f9fc;
+      --text-light: #111;
+      --bg-dark: #1e1e1e;
+      --text-dark: #eee;
+      --accent: #5056c1;
+    }
+
+    body[data-theme="light"] {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    body[data-theme="dark"] {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    body[data-theme="dark"] .container {
+      background-color: #2c2c2c;
+      color: var(--text-dark);
+    }
+
+    body[data-theme="dark"] a {
+      color: #aabbff;
+    }
+
+    body[data-theme="dark"] .top-bar button {
+      background-color: #595b8f;
+    }
+
     * {
+      font-family: Tahoma, sans-serif;
+      transition: all 0.3s ease;
       box-sizing: border-box;
-      margin: 0; padding: 0;
-      font-family: 'Vazir', Tahoma, sans-serif;
     }
 
     body {
-      background: #f7f9fc;
-      color: #333;
-      line-height: 1.6;
-      padding: 20px;
+      margin: 0;
+      padding: 0 20px 40px;
+    }
+
+    .top-bar {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
       direction: rtl;
+    }
+
+    .top-bar button {
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      user-select: none;
     }
 
     .container {
       max-width: 800px;
-      margin: auto;
-      background: white;
+      margin: 80px auto 30px auto;
+      background-color: white;
       padding: 25px 30px;
-      border-radius: 8px;
+      border-radius: 10px;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
 
     h1, h2 {
-      color: #272A5E; /* آبی نفتی */
+      color: var(--accent);
       margin-bottom: 15px;
     }
 
@@ -40,7 +88,7 @@
     }
 
     h2 {
-      border-bottom: 2px solid #272A5E;
+      border-bottom: 2px solid var(--accent);
       padding-bottom: 5px;
       margin-top: 30px;
       margin-bottom: 15px;
@@ -50,34 +98,36 @@
       margin-bottom: 25px;
     }
 
-    .info-list, .skill-list, .extra-skill-list {
+    ul {
       list-style: none;
       padding-right: 10px;
     }
 
-    .info-list li, .skill-list li, .extra-skill-list li {
+    ul li {
       padding: 6px 0;
       border-bottom: 1px solid #eee;
       display: flex;
       justify-content: space-between;
     }
 
-    .info-list li span:first-child,
-    .skill-list li span:first-child,
-    .extra-skill-list li span:first-child {
+    ul li span:first-child {
       font-weight: bold;
-      color: #272A5E;
+      color: var(--accent);
       min-width: 140px;
     }
 
-    .lang-level {
+    ul li span.level {
+      min-width: 90px;
+      text-align: left;
       font-style: italic;
-      color: #555;
-      font-size: 0.9rem;
-      margin-left: 5px;
+      color: #614d4d;
     }
 
-    /* Responsive */
+    body[dir="rtl"] #skills-list {
+      direction: ltr;
+      text-align: left;
+    }
+
     @media(max-width:600px){
       .container {
         padding: 15px 20px;
@@ -85,84 +135,211 @@
       h1 {
         font-size: 2rem;
       }
-      .info-list li, .skill-list li {
+      ul li {
         flex-direction: column;
         align-items: flex-start;
       }
-      .info-list li span:first-child {
+      ul li span:first-child {
         margin-bottom: 3px;
       }
     }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .download-btn-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .download-btn {
+      background-color: var(--accent);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
   </style>
 </head>
-<body>
+<body data-theme="light" dir="rtl">
 
-<div class="container">
-  <h1>سینا فضلعلی</h1>
-  <p style="color:#555; margin-bottom:20px;">مهندس مکانیک | توسعه نرم‌افزار | هوش مصنوعی و اتوماسیون</p>
-
-  <div class="section">
-    <h2>اطلاعات شخصی</h2>
-    <ul class="info-list">
-      <li><span>نام و نام خانوادگی:</span> سینا فضلعلی</li>
-      <li><span>جنسیت:</span> مرد</li>
-      <li><span>وضعیت تاهل:</span> مجرد</li>
-      <li><span>وضعیت نظام وظیفه:</span> معافیت تحصیلی</li>
-      <li><span>شهر محل سکونت:</span> تهران</li>
-      <li><span>محل سکونت:</span> شمس آباد (مجیدیه شمالی)</li>
-      <li><span>تاریخ تولد:</span> ۱۳۸۱/۱۱/۱۳</li>
-    </ul>
+  <div class="top-bar">
+    <button onclick="toggleTheme()">🌓 تغییر تم</button>
+    <button onclick="toggleLanguage()">🌐 تغییر زبان</button>
   </div>
 
-  <div class="section">
-    <h2>تحصیلات</h2>
-    <ul class="info-list">
-      <li><span>کارشناسی:</span> مهندسی مکانیک</li>
-      <li><span>دانشگاه:</span> دانشگاه تهران</li>
-      <li><span>سال تحصیل:</span> ۱۴۰۰ تاکنون (در حال تحصیل)</li>
-    </ul>
+  <div class="container" id="resume" dir="rtl">
+    <h1 id="name">سینا فضلعلی</h1>
+    <p id="desc">مهندس مکانیک | توسعه نرم‌افزار | هوش مصنوعی و اتوماسیون</p>
+
+    <div class="section">
+      <h2 id="personal">اطلاعات شخصی</h2>
+      <ul>
+        <li><span id="fullname-label">نام و نام خانوادگی:</span> <span id="fullname">سینا فضلعلی</span></li>
+        <li><span id="gender-label">جنسیت:</span> <span id="gender">مرد</span></li>
+        <li><span id="marital-label">وضعیت تاهل:</span> <span id="marital">مجرد</span></li>
+        <li><span id="military-label">وضعیت نظام وظیفه:</span> <span id="military">معافیت تحصیلی</span></li>
+        <li><span id="city-label">شهر:</span> <span id="city">تهران</span></li>
+        <li><span id="region-label">محل سکونت:</span> <span id="region">شمس آباد</span></li>
+        <li><span id="phone-label">تلفن:</span> <a href="tel:+989123456789" id="phone">۰۹۱۲۲۰۲۹۷۳۵</a></li>
+        <li><span id="email-label">ایمیل:</span> <a href="mailto:sina.fazlali@gmail.com" id="email">sinafazlali.sf@gmail.com</a></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2 id="edu-title">تحصیلات</h2>
+      <ul>
+        <li><span id="degree-label">مقطع:</span> <span id="degree">کارشناسی - مهندسی مکانیک</span></li>
+        <li><span id="university-label">دانشگاه:</span> <span id="university">دانشگاه تهران</span></li>
+        <li><span id="year-label">سال تحصیل:</span> <span id="year">۱۴۰۰ تاکنون (در حال تحصیل)</span></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2 id="job-group-title">گروه شغلی مورد علاقه</h2>
+      <p id="job-group">توسعه نرم‌افزار و برنامه‌نویسی، IT - Software Development (Web, Mobile, ...)، مهندسی مکانیک / مهندسی هوا و فضا، هوش مصنوعی و اتوماسیون</p>
+    </div>
+
+    <div class="section">
+      <h2 id="skills-title">مهارت‌های نرم‌افزاری</h2>
+      <ul id="skills-list">
+        <li><span>Microsoft Word</span><span id="level1" class="level">پیشرفته</span></li>
+        <li><span>Microsoft Excel</span><span id="level2" class="level">پیشرفته</span></li>
+        <li><span>MATLAB</span><span id="level3" class="level">پیشرفته</span></li>
+        <li><span>HTML & CSS</span><span id="level4" class="level">پیشرفته</span></li>
+        <li><span>JavaScript</span><span id="level5" class="level">متوسط</span></li>
+        <li><span>Django</span><span id="level6" class="level">متوسط</span></li>
+        <li><span>React</span><span id="level7" class="level">متوسط</span></li>
+        <li><span>Next.js</span><span id="level8" class="level">متوسط</span></li>
+        <li><span>Proteus</span><span id="level9" class="level">متوسط</span></li>
+        <li><span>EES</span><span id="level10" class="level">متوسط</span></li>
+        <li><span>Solidworks</span><span id="level11" class="level">متوسط</span></li>
+        <li><span>C++</span><span id="level12" class="level">متوسط</span></li>
+        <li><span>Python</span><span id="level13" class="level">متوسط</span></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2 id="extra-skills-title">مهارت‌های تکمیلی</h2>
+      <ul>
+        <li id="x1">طراحی سیستم‌های کنترل خطی و کنترل مدرن</li>
+        <li id="x2">آشنایی با سیستم رباتیک ROS2</li>
+        <li id="x3">آشنایی با انواع بهینه‌سازی سیستم‌ها</li>
+        <li id="x4">طراحی فرانت‌اند با React و Next.js</li>
+        <li id="x5">طراحی بک‌اند با Django</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2 id="lang-title">زبان‌ها</h2>
+      <p id="lang">انگلیسی | بالاتر از متوسط</p>
+    </div>
+
+    <div class="download-btn-container">
+      <button class="download-btn" onclick="window.print()">📄 دانلود PDF رزومه</button>
+    </div>
   </div>
 
-  <div class="section">
-    <h2>گروه شغلی مورد علاقه</h2>
-    <p>توسعه نرم‌افزار و برنامه‌نویسی، IT - Software Development (Web, Mobile, ...)، مهندسی مکانیک / مهندسی هوا و فضا، هوش مصنوعی و اتوماسیون</p>
-  </div>
+<script>
+  const levelsFaToEn = {
+    "پیشرفته": "Advanced",
+    "متوسط": "Intermediate"
+  };
+  const levelsEnToFa = {
+    "Advanced": "پیشرفته",
+    "Intermediate": "متوسط"
+  };
 
-  <div class="section">
-    <h2>مهارت‌های نرم‌افزاری</h2>
-    <ul class="skill-list">
-      <li><span>Microsoft Word</span> <span>پیشرفته</span></li>
-      <li><span>Microsoft Excel</span> <span>پیشرفته</span></li>
-      <li><span>MATLAB</span> <span>پیشرفته</span></li>
-      <li><span>HTML &amp; CSS</span> <span>پیشرفته</span></li>
-      <li><span>JavaScript</span> <span>متوسط</span></li>
-      <li><span>Django</span> <span>متوسط</span></li>
-      <li><span>React</span> <span>متوسط</span></li>
-      <li><span>Next.js</span> <span>متوسط</span></li>
-      <li><span>Proteus</span> <span>متوسط</span></li>
-      <li><span>EES - Engineering Equation Solver</span> <span>متوسط</span></li>
-      <li><span>Solidworks</span> <span>متوسط</span></li>
-      <li><span>C++</span> <span>متوسط</span></li>
-      <li><span>Python</span> <span>متوسط</span></li>
-    </ul>
-  </div>
+  function toggleTheme() {
+    const current = document.body.getAttribute("data-theme");
+    if (current === "dark") {
+      document.body.setAttribute("data-theme", "light");
+    } else {
+      document.body.setAttribute("data-theme", "dark");
+    }
+  }
 
-  <div class="section">
-    <h2>مهارت‌های تکمیلی</h2>
-    <ul class="extra-skill-list">
-      <li>طراحی سیستم‌های کنترل خطی و کنترل مدرن</li>
-      <li>آشنایی با سیستم رباتیک ROS2</li>
-      <li>آشنایی با انواع بهینه‌سازی سیستم‌ها</li>
-      <li>طراحی فرانت‌اند با تکنولوژی React و Next.js</li>
-      <li>طراحی بک‌اند با تکنولوژی Django</li>
-    </ul>
-  </div>
+  let currentLang = "fa";
+  function toggleLanguage() {
+    const r = document.getElementById("resume");
+    const en = currentLang === "fa";
+    currentLang = en ? "en" : "fa";
 
-  <div class="section">
-    <h2>زبان‌ها</h2>
-    <p>انگلیسی | بالاتر از متوسط</p>
-  </div>
-</div>
+    document.body.dir = en ? "ltr" : "rtl";
+    r.dir = document.body.dir;
+    document.documentElement.lang = currentLang;
+
+    document.getElementById("name").innerText = en ? "Sina Fazlali" : "سینا فضلعلی";
+    document.getElementById("desc").innerText = en ? "Mechanical Engineer | Software Developer | AI & Automation" : "مهندس مکانیک | توسعه نرم‌افزار | هوش مصنوعی و اتوماسیون";
+
+    document.getElementById("personal").innerText = en ? "Personal Information" : "اطلاعات شخصی";
+    document.getElementById("fullname-label").innerText = en ? "Full Name:" : "نام و نام خانوادگی:";
+    document.getElementById("fullname").innerText = en ? "Sina Fazlali" : "سینا فضلعلی";
+    document.getElementById("gender-label").innerText = en ? "Gender:" : "جنسیت:";
+    document.getElementById("gender").innerText = en ? "Male" : "مرد";
+    document.getElementById("marital-label").innerText = en ? "Marital Status:" : "وضعیت تاهل:";
+    document.getElementById("marital").innerText = en ? "Single" : "مجرد";
+    document.getElementById("military-label").innerText = en ? "Military Service:" : "وضعیت نظام وظیفه:";
+    document.getElementById("military").innerText = en ? "Educational Exemption" : "معافیت تحصیلی";
+    document.getElementById("city-label").innerText = en ? "City:" : "شهر:";
+    document.getElementById("city").innerText = en ? "Tehran" : "تهران";
+    document.getElementById("region-label").innerText = en ? "Region:" : "محل سکونت:";
+    document.getElementById("region").innerText = en ? "Shams Abad" : "شمس آباد";
+    document.getElementById("phone-label").innerText = en ? "Phone:" : "تلفن:";
+    document.getElementById("phone").innerText = en ? "+989122029735" : "۰۹۱۲۲۰۲۹۷۳۵";
+    document.getElementById("phone").href = "tel:+989122029735";
+    document.getElementById("email-label").innerText = en ? "Email:" : "ایمیل:";
+    document.getElementById("email").innerText = "sinafazlali.sf@gmail.com";
+    document.getElementById("email").href = "mailto:sinafazlali.sf@gmail.com";
+
+    document.getElementById("edu-title").innerText = en ? "Education" : "تحصیلات";
+    document.getElementById("degree-label").innerText = en ? "Degree:" : "مقطع:";
+    document.getElementById("degree").innerText = en ? "Bachelor - Mechanical Engineering" : "کارشناسی - مهندسی مکانیک";
+    document.getElementById("university-label").innerText = en ? "University:" : "دانشگاه:";
+    document.getElementById("university").innerText = en ? "University of Tehran" : "دانشگاه تهران";
+    document.getElementById("year-label").innerText = en ? "Study Period:" : "سال تحصیل:";
+    document.getElementById("year").innerText = en ? "2021 - Present" : "۱۴۰۰ تاکنون (در حال تحصیل)";
+
+    document.getElementById("job-group-title").innerText = en ? "Preferred Job Fields" : "گروه شغلی مورد علاقه";
+    document.getElementById("job-group").innerText = en
+      ? "Software Development (Web, Mobile), Mechanical Engineering, Aerospace Engineering, AI and Automation"
+      : "توسعه نرم‌افزار و برنامه‌نویسی، IT - Software Development (Web, Mobile, ...)، مهندسی مکانیک / مهندسی هوا و فضا، هوش مصنوعی و اتوماسیون";
+
+    document.getElementById("skills-title").innerText = en ? "Technical Skills" : "مهارت‌های نرم‌افزاری";
+
+    for(let i=1; i<=13; i++) {
+      let el = document.getElementById("level" + i);
+      if(el) {
+        if(en) {
+          el.innerText = levelsFaToEn[el.innerText] || el.innerText;
+        } else {
+          el.innerText = levelsEnToFa[el.innerText] || el.innerText;
+        }
+      }
+    }
+
+    document.getElementById("extra-skills-title").innerText = en ? "Additional Skills" : "مهارت‌های تکمیلی";
+    document.getElementById("x1").innerText = en ? "Linear & Modern Control System Design" : "طراحی سیستم‌های کنترل خطی و کنترل مدرن";
+    document.getElementById("x2").innerText = en ? "Familiar with ROS2 Robotic System" : "آشنایی با سیستم رباتیک ROS2";
+    document.getElementById("x3").innerText = en ? "Familiar with Optimization Methods" : "آشنایی با انواع بهینه‌سازی سیستم‌ها";
+    document.getElementById("x4").innerText = en ? "Frontend Design with React & Next.js" : "طراحی فرانت‌اند با React و Next.js";
+    document.getElementById("x5").innerText = en ? "Backend Development with Django" : "طراحی بک‌اند با Django";
+
+    document.getElementById("lang-title").innerText = en ? "Languages" : "زبان‌ها";
+    document.getElementById("lang").innerText = en ? "English | Upper Intermediate" : "انگلیسی | بالاتر از متوسط";
+  }
+
+  document.body.setAttribute("data-theme", "light");
+</script>
 
 </body>
 </html>
